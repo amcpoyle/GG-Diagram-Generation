@@ -1,9 +1,5 @@
 """
-<<<<<<< HEAD
-Generating GG diagrams based on the paper
-=======
 Creating GG diagrams using the approach in the paper
->>>>>>> 22aec6714d176f41f567bc75cc7ae28f8a1b2051
 "An Optimal control Approach to the Computation of g-g Diagrams"
 by Massaro, Lovato, Veneri
 """
