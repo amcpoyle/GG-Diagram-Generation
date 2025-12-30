@@ -1,5 +1,5 @@
 """
-Replicating the GG diagram (figure 3a) from the paper
+Generating GG diagrams based on the paper
 "An Optimal control Approach to the Computation of g-g Diagrams"
 by Massaro, Lovato, Veneri
 """
@@ -75,10 +75,9 @@ pKy1 = -42.8074
 pKy2 = 1.7679
 lambda_muy = 1
 
-V = 30 # m/s
+V = 25 # m/s
 
 
-# this is combined slip?
 def mf_fx_fy(kappa, alpha, Fz):
     global ref_load
 
@@ -130,11 +129,9 @@ N = 181
 alpha = np.linspace(-np.pi/2, np.pi/2, N)
 dalpha = alpha[1] - alpha[0]
 
-# decision variables
 opti = ca.Opti()
 
 # states
-
 rho = opti.variable(N)
 delta = opti.variable(N)
 beta = opti.variable(N)
@@ -179,7 +176,7 @@ for k in range(N-1):
     opti.subject_to(kappa_rl[k+1] == kappa_rl[k] + dalpha*u_kappa_rl[k])
     opti.subject_to(kappa_rr[k+1] == kappa_rr[k] + dalpha*u_kappa_rr[k])
 
-# added to try to resolve errors
+# bounding values for states
 for k in range(N):
     opti.subject_to(opti.bounded(-np.pi/4, beta[k], np.pi/4))
     opti.subject_to(opti.bounded(-0.3, kappa_fl[k], 0.3))
@@ -230,8 +227,8 @@ for k in range(N):
     
     # opti.subject_to((fx_fl + fx_fr) == gamma*(fx_rl + fx_rr))
 
-    # TODO: include brake ratio equilibrium?
     if alpha[k] < 0:
+        # under braking: brake ratio equilibrium
         opti.subject_to((fx_fl + fx_fr) == gamma*(fx_rl + fx_rr))
     else:
         # forces on axle are assumed equal
@@ -242,6 +239,7 @@ for k in range(N):
 
 u_max = 10
 
+# bounding controls
 opti.subject_to(opti.bounded(-u_max, u_rho, u_max))
 opti.subject_to(opti.bounded(-u_max, u_delta, u_max))
 opti.subject_to(opti.bounded(-u_max, u_beta, u_max))
@@ -274,8 +272,8 @@ ay_hat = rho_sol*g*np.cos(alpha)
 plt.plot(ay_hat/g, ax_hat/g, 'k', lw=2)
 plt.xlabel(r'$a_y/g$')
 plt.ylabel(r'$a_x/g$')
-plt.xlim(-1.5, 1.5)
-plt.ylim(-1.5, 1.5)
+# plt.xlim(-1.5, 1.5)
+# plt.ylim(-1.5, 1.5)
 plt.axis('equal')
 plt.show()
 
