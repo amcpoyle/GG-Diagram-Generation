@@ -124,12 +124,11 @@ def normal_loads(ax, ay, u):
 
     return Nfl, Nfr, Nrl, Nrr
 
-# discretization in alpha
+# discretization
 N = 181
 alpha = np.linspace(-np.pi/2, np.pi/2, N)
 dalpha = alpha[1] - alpha[0]
 
-# decision variables
 opti = ca.Opti()
 
 # states
@@ -178,7 +177,7 @@ for k in range(N-1):
     opti.subject_to(kappa_rl[k+1] == kappa_rl[k] + dalpha*u_kappa_rl[k])
     opti.subject_to(kappa_rr[k+1] == kappa_rr[k] + dalpha*u_kappa_rr[k])
 
-# added to try to resolve errors
+# bounding our states to a reasonable range
 for k in range(N):
     opti.subject_to(opti.bounded(-np.pi/4, beta[k], np.pi/4))
     opti.subject_to(opti.bounded(-0.3, kappa_fl[k], 0.3))
@@ -231,6 +230,7 @@ for k in range(N):
 
     # TODO: include brake ratio equilibrium?
     if alpha[k] < 0:
+        # brake
         opti.subject_to((fx_fl + fx_fr) == gamma*(fx_rl + fx_rr))
     else:
         # forces on axle are assumed equal
