@@ -1,5 +1,9 @@
 """
+<<<<<<< HEAD
 Generating GG diagrams based on the paper
+=======
+Creating GG diagrams using the approach in the paper
+>>>>>>> 22aec6714d176f41f567bc75cc7ae28f8a1b2051
 "An Optimal control Approach to the Computation of g-g Diagrams"
 by Massaro, Lovato, Veneri
 """
@@ -124,7 +128,7 @@ def normal_loads(ax, ay, u):
 
     return Nfl, Nfr, Nrl, Nrr
 
-# discretization in alpha
+# discretization
 N = 181
 alpha = np.linspace(-np.pi/2, np.pi/2, N)
 dalpha = alpha[1] - alpha[0]
@@ -176,7 +180,11 @@ for k in range(N-1):
     opti.subject_to(kappa_rl[k+1] == kappa_rl[k] + dalpha*u_kappa_rl[k])
     opti.subject_to(kappa_rr[k+1] == kappa_rr[k] + dalpha*u_kappa_rr[k])
 
+<<<<<<< HEAD
 # bounding values for states
+=======
+# bounding our states to a reasonable range
+>>>>>>> 22aec6714d176f41f567bc75cc7ae28f8a1b2051
 for k in range(N):
     opti.subject_to(opti.bounded(-np.pi/4, beta[k], np.pi/4))
     opti.subject_to(opti.bounded(-0.3, kappa_fl[k], 0.3))
@@ -228,7 +236,11 @@ for k in range(N):
     # opti.subject_to((fx_fl + fx_fr) == gamma*(fx_rl + fx_rr))
 
     if alpha[k] < 0:
+<<<<<<< HEAD
         # under braking: brake ratio equilibrium
+=======
+        # brake
+>>>>>>> 22aec6714d176f41f567bc75cc7ae28f8a1b2051
         opti.subject_to((fx_fl + fx_fr) == gamma*(fx_rl + fx_rr))
     else:
         # forces on axle are assumed equal
