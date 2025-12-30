@@ -1,5 +1,5 @@
 """
-Replicating the GG diagram (figure 3a) from the paper
+Creating GG diagrams using the approach in the paper
 "An Optimal control Approach to the Computation of g-g Diagrams"
 by Massaro, Lovato, Veneri
 """
