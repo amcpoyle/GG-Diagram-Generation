@@ -78,7 +78,6 @@ lambda_muy = 1
 V = 30 # m/s
 
 
-# this is combined slip?
 def mf_fx_fy(kappa, alpha, Fz):
     global ref_load
 
