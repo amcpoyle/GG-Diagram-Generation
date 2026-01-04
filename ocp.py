@@ -177,7 +177,6 @@ for k in range(N-1):
     opti.subject_to(kappa_rr[k+1] == kappa_rr[k] + dalpha*u_kappa_rr[k])
 
 # bounding our states to a reasonable range
->>>>>>> 22aec6714d176f41f567bc75cc7ae28f8a1b2051
 for k in range(N):
     opti.subject_to(opti.bounded(-np.pi/4, beta[k], np.pi/4))
     opti.subject_to(opti.bounded(-0.3, kappa_fl[k], 0.3))
