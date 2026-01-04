@@ -176,9 +176,6 @@ for k in range(N-1):
     opti.subject_to(kappa_rl[k+1] == kappa_rl[k] + dalpha*u_kappa_rl[k])
     opti.subject_to(kappa_rr[k+1] == kappa_rr[k] + dalpha*u_kappa_rr[k])
 
-<<<<<<< HEAD
-# bounding values for states
-=======
 # bounding our states to a reasonable range
 >>>>>>> 22aec6714d176f41f567bc75cc7ae28f8a1b2051
 for k in range(N):
@@ -232,11 +229,7 @@ for k in range(N):
     # opti.subject_to((fx_fl + fx_fr) == gamma*(fx_rl + fx_rr))
 
     if alpha[k] < 0:
-<<<<<<< HEAD
         # under braking: brake ratio equilibrium
-=======
-        # brake
->>>>>>> 22aec6714d176f41f567bc75cc7ae28f8a1b2051
         opti.subject_to((fx_fl + fx_fr) == gamma*(fx_rl + fx_rr))
     else:
         # forces on axle are assumed equal
